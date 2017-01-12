@@ -10,15 +10,20 @@ APP.View = (function() {
     _attachClickHandler(args.clickHandler);
   };
 
-  var deactivateMoleHole = function(moleHole) {
+  var switchActiveMoleHole = function(oldMoleHole, newMoleHole) {
+    _activateMoleHole(newMoleHole);
+    _deactivateMoleHole(oldMoleHole);
+  };
+
+  var _activateMoleHole = function(moleHole) {
+    var $moleHole = _findMoleHole(moleHole);
+    $moleHole.addClass("active");
+  };
+
+  var _deactivateMoleHole = function(moleHole) {
     var $moleHole = _findMoleHole(moleHole);
     $moleHole.removeClass("active");
   };
-
-  var activateMoleHole = function(moleHole) {
-    var $moleHole = _findMoleHole(moleHole);
-    $moleHole.addClass("active");
-  }
 
   var _findMoleHole = function(moleHole) {
     var dataX = moleHole.x;
@@ -26,8 +31,7 @@ APP.View = (function() {
     var compositeKeyString = "[data-x=" + dataX + "]" +
                              "[data-y=" + dataY + "]"
     return $(compositeKeyString);
-  }
-
+  };
 
   var _attachClickHandler = function(callback) {
     _$moleContainer.on("click", ".mole-hole", function(e) {
@@ -36,7 +40,7 @@ APP.View = (function() {
       var targetY = parseInt($target.data("y"));
       callback(targetX, targetY);
     });
-  }
+  };
 
   var _createBoard = function(board) {
     for(var rowCount = 0; rowCount < board.length; rowCount++) {
@@ -62,8 +66,7 @@ APP.View = (function() {
 
   return {
     init: init,
-    deactivateMoleHole: deactivateMoleHole,
-    activateMoleHole: activateMoleHole
+    switchActiveMoleHole: switchActiveMoleHole
   };
 
 }());

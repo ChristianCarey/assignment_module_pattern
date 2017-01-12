@@ -15,7 +15,7 @@ APP.Controller = (function(View, Model) {
       var oldMole = Model.removeActiveMole();
       var newMole = Model.randomMole();
       View.switchActiveMoleHole(oldMole, newMole);
-    }, 1000);
+    }, 2500);
   }
 
   var _moleHoleClicked = function(x, y) {
