@@ -10,13 +10,22 @@ APP.Controller = (function(View, Model) {
                 clickHandler: _moleHoleClicked  });
   };
 
+  var play = function() {
+    var interval = setInterval(function() {
+      var oldMole = Model.removeActiveMole();
+      var newMole = Model.randomMole();
+      View.switchActiveMoleHole(oldMole, newMole);
+    }, 1000);
+  }
+
   var _moleHoleClicked = function(x, y) {
     var moleHole = Model.click(x, y);
-    View.updateMoleHole(moleHole);
+    View.deactivateMoleHole(moleHole);
   };
 
   return {
-    init: init
+    init: init,
+    play: play
   };
 
 }(APP.View, APP.Model));

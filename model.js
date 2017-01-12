@@ -6,10 +6,12 @@ APP.Model = (function() {
 
   var rows;
   var _score;
+  var _activeMole;
 
   var init = function() {
     _setupBoard(2, 4);
     _score = 0;
+    randomMole();
   };
 
   var getBoard = function() {
@@ -17,13 +19,25 @@ APP.Model = (function() {
   };
 
   var click = function(x, y) {
-    var moleHole = rows[x][y];
+    var moleHole = rows[y][x];
     if (moleHole.active) {
       moleHole.active = false;
       _score++;
     }
     return moleHole;
   };
+
+  var randomMole = function() {
+    var randRow = Math.floor(Math.random() * rows.length);
+    var randCol = Math.floor(Math.random() * rows[0].length);
+    _activeMole = rows[randRow][randCol];
+    return _activeMole;
+  };
+
+  var removeActiveMole = function() {
+    _activeMole.active = false;
+    return _activeMole;
+  }
 
   var _setupBoard = function(rowNums, colNums) {
     rows = _createRows(rowNums, colNums);
@@ -55,7 +69,9 @@ APP.Model = (function() {
   return {
     init: init,
     getBoard: getBoard,
-    click: click
+    click: click,
+    randomMole: randomMole,
+    removeActiveMole: removeActiveMole
   };
 
 }());

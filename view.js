@@ -10,13 +10,24 @@ APP.View = (function() {
     _attachClickHandler(args.clickHandler);
   };
 
-  var updateMoleHole = function(moleHole) {
+  var deactivateMoleHole = function(moleHole) {
+    var $moleHole = _findMoleHole(moleHole);
+    $moleHole.removeClass("active");
+  };
+
+  var activateMoleHole = function(moleHole) {
+    var $moleHole = _findMoleHole(moleHole);
+    $moleHole.addClass("active");
+  }
+
+  var _findMoleHole = function(moleHole) {
     var dataX = moleHole.x;
     var dataY = moleHole.y;
     var compositeKeyString = "[data-x=" + dataX + "]" +
                              "[data-y=" + dataY + "]"
-    var $moleHole = $(compositeKeyString);
-  };
+    return $(compositeKeyString);
+  }
+
 
   var _attachClickHandler = function(callback) {
     _$moleContainer.on("click", ".mole-hole", function(e) {
@@ -51,7 +62,8 @@ APP.View = (function() {
 
   return {
     init: init,
-    updateMoleHole: updateMoleHole
+    deactivateMoleHole: deactivateMoleHole,
+    activateMoleHole: activateMoleHole
   };
 
 }());

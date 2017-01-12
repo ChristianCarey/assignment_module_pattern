@@ -14,4 +14,12 @@
   width: 150px;
   height: 150px;
   background: tomato;
+  cursor: pointer;
+}
+
+.active {
+  background-image: url('diglet.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
