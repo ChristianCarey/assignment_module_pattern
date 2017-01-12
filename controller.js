@@ -6,14 +6,17 @@ APP.Controller = (function(View, Model) {
 
   var init = function() {
     Model.init();
-    View.init(Model.getBoard());
-  }
+    View.init({ board: Model.getBoard(),
+                clickHandler: _moleHoleClicked  });
+  };
 
-  var moleHoleClicked() {
-    
-  }
+  var _moleHoleClicked = function(x, y) {
+    var moleHole = Model.click(x, y);
+    View.updateMoleHole(moleHole);
+  };
 
   return {
     init: init
-  }
-}(APP.View, APP.Model))
+  };
+
+}(APP.View, APP.Model));

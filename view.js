@@ -4,16 +4,27 @@ APP = APP || {};
 
 APP.View = (function() {
 
-  var init = function(board) {
+  var init = function(args) {
     _$moleContainer = $('#mole-container');
-    _createBoard(board);
-    _attachClickHandler();
+    _createBoard(args.board);
+    _attachClickHandler(args.clickHandler);
   };
 
-  var _$moleContainer;
+  var updateMoleHole = function(moleHole) {
+    var dataX = moleHole.x;
+    var dataY = moleHole.y;
+    var compositeKeyString = "[data-x=" + dataX + "]" +
+                             "[data-y=" + dataY + "]"
+    var $moleHole = $(compositeKeyString);
+  };
 
-  var _attachClickHandler() {
-    $_moleContainer.on("click", )
+  var _attachClickHandler = function(callback) {
+    _$moleContainer.on("click", ".mole-hole", function(e) {
+      var $target = $(e.target);
+      var targetX = parseInt($target.data("x"));
+      var targetY = parseInt($target.data("y"));
+      callback(targetX, targetY);
+    });
   }
 
   var _createBoard = function(board) {
@@ -31,12 +42,16 @@ APP.View = (function() {
   var _createMoleHole = function(moleHole) {
     var $moleHole = $('<div>')
       .addClass("mole-hole")
-      .attr("id", moleHole.x + "-" + moleHole.y);
+      .attr("data-x", moleHole.x)
+      .attr("data-y", moleHole.y);
     return $moleHole;
   };
 
+  var _$moleContainer;
+
   return {
-    init: init
-  }
+    init: init,
+    updateMoleHole: updateMoleHole
+  };
 
 }());

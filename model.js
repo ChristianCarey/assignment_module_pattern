@@ -5,14 +5,24 @@ APP = APP || {};
 APP.Model = (function() {
 
   var rows;
+  var _score;
 
   var init = function() {
     _setupBoard(2, 4);
-
+    _score = 0;
   };
 
   var getBoard = function() {
     return rows;
+  };
+
+  var click = function(x, y) {
+    var moleHole = rows[x][y];
+    if (moleHole.active) {
+      moleHole.active = false;
+      _score++;
+    }
+    return moleHole;
   };
 
   var _setupBoard = function(rowNums, colNums) {
@@ -44,7 +54,8 @@ APP.Model = (function() {
 
   return {
     init: init,
-    getBoard: getBoard
+    getBoard: getBoard,
+    click: click
   };
 
 }());
