@@ -1,44 +1,48 @@
-'use strict':
+'use strict';
 
 APP = APP || {};
 
 APP.Model = (function() {
 
-  var boardState;
+  var rows;
 
   var init = function() {
     _setupBoard(2, 4);
 
   };
 
-  var _setupBoard = function(rowNums, colNums) {
-    var rows = _createRows(rowNums, colNums);
-    _populateRows(colNums, rows);
+  var getBoard = function() {
     return rows;
+  };
+
+  var _setupBoard = function(rowNums, colNums) {
+    rows = _createRows(rowNums, colNums);
+    _populateRows(rows);
   };
 
   var _createRows = function(rowNums, colNums) {
-    var rows = new Array(number);
-    rows.map(function() {
-      return new Array(colNums)
-    });
+    var rows = new Array(rowNums);
+    for(var rowCount = 0; rowCount < rowNums; rowCount++) {
+      rows.push(new Array(colNums))
+    }
     return rows;
   };
 
-  var _populateRows(rows) {
-    rows.forEach(function(row) {
-      row.map(function()) {
-        new MoleHole;
-      };
+  var _populateRows = function(rows) {
+    rows.forEach(function(row, rowIndex) {
+      row.map(function(_, colIndex) {
+        new _MoleHole(colIndex, rowIndex)
+      });
     });
   };
 
-  var getBoardState = function() {
-    return boardState
+  var _MoleHole = function MoleHole(x, y) {
+    return { x: x, y: y, active: false };
   };
 
   return {
-    init: init
-    getBoardState: getBoardState
-  }
+    init: init,
+    getBoard: getBoard
+  };
+
 }());

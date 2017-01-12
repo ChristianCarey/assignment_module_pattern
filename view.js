@@ -1,11 +1,11 @@
-'use strict':
+'use strict';
 
 APP = APP || {};
 
 APP.View = (function() {
-  
+
   var init = function() {
-    
+
   };
 
   return {
