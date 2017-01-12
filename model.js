@@ -23,21 +23,23 @@ APP.Model = (function() {
   var _createRows = function(rowNums, colNums) {
     var rows = new Array(rowNums);
     for(var rowCount = 0; rowCount < rowNums; rowCount++) {
-      rows.push(new Array(colNums))
+      rows[rowCount] = new Array(colNums);
     }
     return rows;
   };
 
   var _populateRows = function(rows) {
     rows.forEach(function(row, rowIndex) {
-      row.map(function(_, colIndex) {
-        new _MoleHole(colIndex, rowIndex)
-      });
+      for (var colCount = 0; colCount < row.length; colCount++) {
+        row[colCount] = new _MoleHole(colCount, rowIndex);
+      };
     });
   };
 
   var _MoleHole = function MoleHole(x, y) {
-    return { x: x, y: y, active: false };
+    this.x = x;
+    this.y = y;
+    this.active = false;
   };
 
   return {

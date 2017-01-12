@@ -9,6 +9,10 @@ APP.Controller = (function(View, Model) {
     View.init(Model.getBoard());
   }
 
+  var moleHoleClicked() {
+    
+  }
+
   return {
     init: init
   }
