@@ -12,7 +12,7 @@ APP.View = (function() {
 
   var switchActiveMoleHole = function(oldMoleHole, newMoleHole) {
     _activateMoleHole(newMoleHole);
-    _deactivateMoleHole(oldMoleHole);
+    deactivateMoleHole(oldMoleHole);
   };
 
   var _activateMoleHole = function(moleHole) {
@@ -20,7 +20,7 @@ APP.View = (function() {
     $moleHole.addClass("active");
   };
 
-  var _deactivateMoleHole = function(moleHole) {
+  var deactivateMoleHole = function(moleHole) {
     var $moleHole = _findMoleHole(moleHole);
     $moleHole.removeClass("active");
   };
@@ -66,7 +66,8 @@ APP.View = (function() {
 
   return {
     init: init,
-    switchActiveMoleHole: switchActiveMoleHole
+    switchActiveMoleHole: switchActiveMoleHole,
+    deactivateMoleHole: deactivateMoleHole
   };
 
 }());
